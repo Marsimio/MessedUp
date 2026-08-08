@@ -13,6 +13,8 @@ public class Act2Manager : MonoBehaviour
     [SerializeField] private Transform[] teleportTargets;
     [SerializeField] private WindowsAlert alert;
     [SerializeField] private GameObject[] removableDoors;
+    [SerializeField] private WallpaperChange wallpaperChange;
+    [SerializeField] private IconShuffle iconShuffle;
 
     private bool _waitingForAltTab;
     private bool _wasFocused = true;
@@ -125,6 +127,8 @@ public class Act2Manager : MonoBehaviour
         yield return new WaitForSecondsRealtime(2f);
         
         TeleportPlayer(1);
+        wallpaperChange.Change();
+        iconShuffle.Shuffle();
         SIMain.Window.GameMinimize();
 
         Debug.Log("Sequence complete.");
@@ -138,28 +142,31 @@ public class Act2Manager : MonoBehaviour
             return;
         }
 
+        if (targetIndex < 0 || targetIndex >= teleportTargets.Length)
+        {
+            Debug.LogError($"Invalid teleport target index: {targetIndex}");
+            return;
+        }
+
         Transform target = teleportTargets[targetIndex];
 
-        CharacterController controller = player.GetComponentInChildren<CharacterController>();
+        // player should reference PlayerRoot.
+        CharacterController controller =
+            player.GetComponentInChildren<CharacterController>();
 
         if (controller != null)
-        {
             controller.enabled = false;
 
-            controller.transform.SetPositionAndRotation(
-                target.position,
-                target.rotation
-            );
+        // Rotate only around the vertical axis.
+        Vector3 targetEuler = target.eulerAngles;
 
+        player.SetPositionAndRotation(
+            target.position,
+            Quaternion.Euler(0f, targetEuler.y, 0f)
+        );
+
+        if (controller != null)
             controller.enabled = true;
-        }
-        else
-        {
-            player.SetPositionAndRotation(
-                target.position,
-                target.rotation
-            );
-        }
 
         Debug.Log($"Player teleported to {target.position}");
     }
