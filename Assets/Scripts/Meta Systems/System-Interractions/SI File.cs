@@ -1,8 +1,17 @@
+using System;
 using System.IO;
 using UnityEngine;
 
 public class SIFile : MonoBehaviour
 {
+    public string GetDocumentsPath(string relativePath)
+    {
+        string documentsPath =
+            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+        return Path.Combine(documentsPath, relativePath);
+    }
+    
     public void Open(string path)
     {
         Debug.Log($"Opening file: {path}");

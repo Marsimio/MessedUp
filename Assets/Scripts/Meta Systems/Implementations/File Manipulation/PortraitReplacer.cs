@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +13,14 @@ public class PortraitReplacer : MonoBehaviour
     {
         _rawImage = GetComponent<RawImage>();
 
-        Texture2D tex = SIMain.File.LoadImage(imagePath);
+        string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+        string fullImagePath = Path.Combine(
+            documentsPath,
+            imagePath
+        );
+
+        Texture2D tex = SIMain.File.LoadImage(fullImagePath);
 
         if (tex != null)
         {
@@ -19,7 +28,7 @@ public class PortraitReplacer : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Failed to load texture.");
+            Debug.LogWarning($"Failed to load texture: {fullImagePath}");
         }
     }
 }

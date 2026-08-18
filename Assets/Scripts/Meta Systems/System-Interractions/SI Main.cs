@@ -10,7 +10,7 @@ public class SIMain : MonoBehaviour
     public static SIWindow Window { get; private set; }
     public static SIPower Power { get; private set; }
 
-    public static bool SimulationMode = true;
+    public static bool SimulationMode = false;
 
     private void Awake()
     {

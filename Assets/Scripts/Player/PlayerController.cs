@@ -10,7 +10,10 @@ public class PlayerController : MonoBehaviour
     private PlayerLook _playerLook;
     private PlayerInteract _playerInteract;
 
-    private bool _inputLocked;
+    private bool _inputResetLocked;
+    private bool _uiInputLocked;
+
+    private bool InputLocked => _inputResetLocked || _uiInputLocked;
 
     private void Awake()
     {
@@ -20,7 +23,7 @@ public class PlayerController : MonoBehaviour
         _playerMovement = GetComponent<PlayerMovement>();
         _playerLook = GetComponent<PlayerLook>();
         _playerInteract = GetComponent<PlayerInteract>();
-        
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -41,14 +44,12 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         _playerControls.Enable();
-
         _onFootActions.Interact.performed += HandleInteract;
     }
 
     private void OnDisable()
     {
         _onFootActions.Interact.performed -= HandleInteract;
-
         _playerControls.Disable();
 
         if (SIMain.PC != null)
@@ -57,7 +58,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (_inputLocked) return;
+        if (InputLocked)
+            return;
 
         Vector2 moveInput = _onFootActions.Movement.ReadValue<Vector2>();
         Vector2 lookInput = _onFootActions.Look.ReadValue<Vector2>();
@@ -68,10 +70,11 @@ public class PlayerController : MonoBehaviour
 
     public void LockInputUntilReconnect()
     {
-        if (_inputLocked) return;
+        if (_inputResetLocked)
+            return;
 
-        _inputLocked = true;
-        _playerControls.Disable();
+        _inputResetLocked = true;
+        RefreshInputState();
 
         if (SIMain.PC != null)
             SIMain.PC.BeginInputResetCheck();
@@ -81,28 +84,49 @@ public class PlayerController : MonoBehaviour
 
     private void HandleInputResetDetected(string deviceName)
     {
-        if (!_inputLocked) return;
+        if (!_inputResetLocked)
+            return;
 
         Debug.Log($"Unlock triggered by: {deviceName}");
-        UnlockInput();
-    }
 
-    private void UnlockInput()
-    {
-        _inputLocked = false;
+        _inputResetLocked = false;
 
         if (SIMain.PC != null)
             SIMain.PC.StopInputResetCheck();
 
-        _playerControls.Enable();
-
-        Debug.Log("Input unlocked.");
+        RefreshInputState();
     }
-    
+
     private void HandleInteract(InputAction.CallbackContext context)
     {
-        if (_inputLocked) return;
+        if (InputLocked)
+            return;
 
         _playerInteract.TryInteract();
+    }
+
+    public void SetUIInputMode(bool enabled)
+    {
+        _uiInputLocked = enabled;
+
+        Cursor.lockState = enabled
+            ? CursorLockMode.None
+            : CursorLockMode.Locked;
+
+        Cursor.visible = enabled;
+
+        RefreshInputState();
+    }
+
+    private void RefreshInputState()
+    {
+        if (InputLocked)
+        {
+            _playerControls.Disable();
+        }
+        else
+        {
+            _playerControls.Enable();
+        }
     }
 }

@@ -42,4 +42,16 @@ public class SIWindow : MonoBehaviour
         Debug.Log("[Fallback] Minimize not supported on this platform.");
 #endif
     }
+    
+    public void CloseApplication()
+    {
+        if (!SIMain.SimulationMode)
+            return;
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+    Application.Quit();
+#endif
+    }
 }

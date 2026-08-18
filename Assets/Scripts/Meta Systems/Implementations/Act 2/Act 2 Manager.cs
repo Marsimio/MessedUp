@@ -9,6 +9,10 @@ public class Act2Manager : MonoBehaviour
     [SerializeField] private FileAction portrait1;
     [SerializeField] private FileAction portrait2;
 
+    [SerializeField] private FileAction MessageCreator;
+    [SerializeField] private FileAction MessageEditor;
+    [SerializeField] private FileAction MessageOpener;
+    
     [SerializeField] private Transform player;
     [SerializeField] private Transform[] teleportTargets;
     [SerializeField] private WindowsAlert alert;
@@ -80,15 +84,25 @@ public class Act2Manager : MonoBehaviour
                 portrait1.Execute();
                 portrait2.Execute();
                 SIMain.Communication.SetWindowName("One has to go");
-                alert.ShowMessage(1);
+                MessageCreator.Execute();
+                MessageOpener.Execute();
+                //SIMain.File.Open(/);
+                //alert.ShowMessage(1);
                 break;
             case 2:
+                MessageEditor.Execute();
+                MessageOpener.Execute();
                 Destroy(removableDoors[0]);
+                break;
+            case 3:
                 SIMain.Communication.SetWindowName("I can solve this for you if you just look away.");
                 WaitForAltTab();
                 break;
-            case 3:
+            case 4:
                 StartCoroutine(FinalSequence());
+                break;
+            case 5:
+                Destroy(removableDoors[1]);
                 break;
             default:
                 Debug.Log("Act 2 complete");

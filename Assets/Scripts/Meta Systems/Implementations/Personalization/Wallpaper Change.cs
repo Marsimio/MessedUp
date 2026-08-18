@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using UnityEngine;
 
 public class WallpaperChange : MonoBehaviour
@@ -12,6 +14,14 @@ public class WallpaperChange : MonoBehaviour
             return;
         }
 
-        SIMain.Personalization.ChangeBackground(imagePath);
+        string documentsPath =
+            Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+        string fullPath = Path.Combine(
+            documentsPath,
+            imagePath
+        );
+
+        SIMain.Personalization.ChangeBackground(fullPath);
     }
 }

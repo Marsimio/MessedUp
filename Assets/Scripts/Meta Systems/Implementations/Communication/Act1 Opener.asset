@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8235f68d441d92f42a167f3dcc3b5eac, type: 3}
   m_Name: Act1 Opener
   m_EditorClassIdentifier: Assembly-CSharp::WindowsAlertData
-  title: Wake up
-  description: Don't let them take it from you
+  title: Wake up, {name}
+  description: '{name}, Don''t let them take it from you'
   alertType: 0
   iconType: 48

@@ -30,7 +30,7 @@ public class ActZone : MonoBehaviour
         }
         if (Act2Manager.Instance != null && actNumber == 3)
         {
-            //Act3Manager.Instance.NextStep();
+            Act3Manager.Instance.NextStep();
         }
 
         _triggered = true;

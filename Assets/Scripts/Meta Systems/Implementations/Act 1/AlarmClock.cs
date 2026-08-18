@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AlarmClock : MonoBehaviour
 {
+    [SerializeField] private AudioSource alarmSource;
+    
     public void ActivateAlarm()
     {
         StartCoroutine(AlarmTimer());
@@ -22,6 +24,7 @@ public class AlarmClock : MonoBehaviour
                 Debug.Log("Alarm stopped (volume is 0)");
                 if (Act1Manager.Instance != null)
                 {
+                    alarmSource.Stop();
                     Act1Manager.Instance.NextStep();
                 }
                 yield break;
