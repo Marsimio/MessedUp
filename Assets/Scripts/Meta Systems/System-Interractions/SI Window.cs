@@ -45,7 +45,7 @@ public class SIWindow : MonoBehaviour
     
     public void CloseApplication()
     {
-        if (!SIMain.SimulationMode)
+        if (SIMain.SimulationMode)
             return;
 
 #if UNITY_EDITOR

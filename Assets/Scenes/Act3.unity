@@ -732,74 +732,6 @@ Mesh:
       - serializedVersion: 1
         m_IndexStart: 0
         m_IndexCount: 0
---- !u!1 &237190935
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 237190938}
-  - component: {fileID: 237190937}
-  - component: {fileID: 237190936}
-  m_Layer: 0
-  m_Name: Interactor 1 (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &237190936
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 237190935}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81f1b451543a65a4f91f3f585b396cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ActZone
-  actNumber: 3
-  triggerOnce: 1
---- !u!65 &237190937
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 237190935}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.141819, y: 1, z: 1}
-  m_Center: {x: 0.004714787, y: 0, z: 0}
---- !u!4 &237190938
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 237190935}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.479, z: -2.55}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &297411439
 GameObject:
   m_ObjectHideFlags: 3
@@ -1916,7 +1848,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7057714261123577116, guid: 455d54a86c480d34a9ae48a3b3fc1398, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.521
+      value: -0.018
       objectReference: {fileID: 0}
     - target: {fileID: 7057714261123577116, guid: 455d54a86c480d34a9ae48a3b3fc1398, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3825,7 +3757,7 @@ Transform:
   m_GameObject: {fileID: 1710177201}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.521, y: 2.0904272, z: -13.9}
+  m_LocalPosition: {x: -0.018, y: 2.0904272, z: -13.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4087,7 +4019,7 @@ Transform:
   m_GameObject: {fileID: 1887790382}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.521, y: 2.0904272, z: -13.9}
+  m_LocalPosition: {x: -0.018, y: 2.0904272, z: -13.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4155,7 +4087,7 @@ Transform:
   m_GameObject: {fileID: 1909455114}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.479, z: -8.28}
+  m_LocalPosition: {x: 0, y: 1.479, z: -6.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4224,7 +4156,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bddd3768c264b504ca863a4c73a32125, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindowsAlert
-  alerts: []
+  alerts:
+  - {fileID: 11400000, guid: b56c3b13bfd766c4db5dbedde6b2f296, type: 2}
+  - {fileID: 11400000, guid: 2fde5e91a67e3d4478ed413c6987b175, type: 2}
+  - {fileID: 11400000, guid: be90bafcbb3050a46aa07a911a5871d1, type: 2}
 --- !u!114 &1938944605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4238,7 +4173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Act3Manager
   currentStep: 0
-  alert: {fileID: 0}
+  alert: {fileID: 1938944604}
 --- !u!1001 &2016622788
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4497,6 +4432,5 @@ SceneRoots:
   - {fileID: 622780792}
   - {fileID: 853951108}
   - {fileID: 1909455117}
-  - {fileID: 237190938}
   - {fileID: 505553828}
   - {fileID: 882479001}

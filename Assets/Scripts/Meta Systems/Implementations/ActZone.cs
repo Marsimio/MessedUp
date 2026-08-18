@@ -28,7 +28,7 @@ public class ActZone : MonoBehaviour
         {
             Act2Manager.Instance.NextStep();
         }
-        if (Act2Manager.Instance != null && actNumber == 3)
+        if (Act3Manager.Instance != null && actNumber == 3)
         {
             Act3Manager.Instance.NextStep();
         }

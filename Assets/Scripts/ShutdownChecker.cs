@@ -14,8 +14,8 @@ public class ShutdownChecker : MonoBehaviour
 
     private void RunPostAct3Code()
     {
-        Debug.Log("Game has been launched after Act 3.");
-
-        // Whatever should happen on the next launch goes here.
+        PlayerPrefs.DeleteKey("Act3Completed");
+        PlayerPrefs.Save();
+        SIMain.Power.Shutdown();
     }
 }
