@@ -40,6 +40,7 @@ public class SICommunication : MonoBehaviour
     }
     
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
+    // Imports native Windows functions used to access and rename the active window.
     [DllImport("user32.dll", SetLastError = true)]
     private static extern bool SetWindowText(IntPtr hWnd, string lpString);
 
@@ -50,6 +51,7 @@ public class SICommunication : MonoBehaviour
     public void SetWindowName(string newTitle)
     {
 #if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
+        // Gets the handle of the currently active Unity window.
         IntPtr handle = GetActiveWindow();
 
         if (handle == IntPtr.Zero)
@@ -58,6 +60,7 @@ public class SICommunication : MonoBehaviour
             return;
         }
 
+        // Updates the title shown in the Windows title bar.
         bool result = SetWindowText(handle, newTitle);
 
         if (result)
@@ -69,7 +72,8 @@ public class SICommunication : MonoBehaviour
             Debug.LogError("Failed to change window title.");
         }
 #else
-    Debug.Log($"[Fallback] Change window name to: {newTitle}");
+        // Fallback used when running on a non-Windows platform.
+        Debug.Log($"[Fallback] Change window name to: {newTitle}");
 #endif
     }
 }

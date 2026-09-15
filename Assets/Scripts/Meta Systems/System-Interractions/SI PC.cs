@@ -81,8 +81,6 @@ public class SIPC : MonoBehaviour
     }
 #endif
 
-    // -------- SYSTEM INFO --------
-
     public string GetComputerName()
     {
         return SystemInfo.deviceName;
@@ -121,16 +119,20 @@ public static class WindowsAudio
 
         try
         {
+            // Creates the Windows multimedia device enumerator.
             enumerator = new MMDeviceEnumerator() as IMMDeviceEnumerator;
 
+            // Retrieves the default multimedia playback device.
             enumerator.GetDefaultAudioEndpoint(
                 EDataFlow.eRender,
                 ERole.eMultimedia,
                 out device
             );
 
+            // Gets the GUID of the Windows audio endpoint volume interface.
             Guid endpointVolumeGuid = typeof(IAudioEndpointVolume).GUID;
 
+            // Activates the volume interface for the selected audio device.
             device.Activate(
                 ref endpointVolumeGuid,
                 CLSCTX.ALL,
@@ -138,6 +140,7 @@ public static class WindowsAudio
                 out object endpointVolumeObject
             );
 
+            // Retrieves the current master volume as a value between 0 and 1.
             volume = endpointVolumeObject as IAudioEndpointVolume;
             volume.GetMasterVolumeLevelScalar(out float level);
 
@@ -151,6 +154,7 @@ public static class WindowsAudio
         }
         finally
         {
+            // Releases the unmanaged COM objects after use.
             if (volume != null)
                 Marshal.ReleaseComObject(volume);
 
@@ -163,6 +167,7 @@ public static class WindowsAudio
     }
 }
 
+// Defines the COM execution contexts available when activating the interface.
 [Flags]
 public enum CLSCTX : uint
 {
@@ -173,10 +178,12 @@ public enum CLSCTX : uint
     ALL = INPROC_SERVER | INPROC_HANDLER | LOCAL_SERVER | REMOTE_SERVER
 }
 
+// Imports the Windows device enumerator used to locate audio devices.
 [ComImport]
 [Guid("BCDE0395-E52F-467C-8E3D-C4579291692E")]
 public class MMDeviceEnumerator { }
 
+// Interface used to retrieve the default Windows audio endpoint.
 [ComImport]
 [Guid("A95664D2-9614-4F35-A746-DE8DB63617E6")]
 [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
@@ -192,6 +199,7 @@ public interface IMMDeviceEnumerator
     );
 }
 
+// Represents a Windows multimedia device.
 [ComImport]
 [Guid("D666063F-1587-4E43-81F1-B948E807363F")]
 [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
@@ -206,6 +214,7 @@ public interface IMMDevice
     );
 }
 
+// Provides access to the master volume controls of the audio endpoint.
 [ComImport]
 [Guid("5CDF2C82-841E-4546-9722-0CF74078229A")]
 [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
@@ -222,6 +231,7 @@ public interface IAudioEndpointVolume
     int GetMasterVolumeLevelScalar(out float level);
 }
 
+// Defines the direction of the audio stream.
 public enum EDataFlow
 {
     eRender,
@@ -229,6 +239,7 @@ public enum EDataFlow
     eAll
 }
 
+// Defines the intended role of the audio device.
 public enum ERole
 {
     eConsole,
